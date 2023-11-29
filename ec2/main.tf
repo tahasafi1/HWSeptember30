@@ -3,7 +3,7 @@ terraform {
     organization = "024_2023-summer-cloud-t"
 
     workspaces {
-      name = "ec2"
+      name = "infra-ec2"
     }
   }
 

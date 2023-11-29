@@ -14,8 +14,16 @@ terraform {
   }
 }
 
+provider "tfe" {
+    hostname = "app.terraform.io"
+    version = "~> 0.50.0"
+}
+
 locals {
-    infra-components = [ "vpc", "subnet", "ec2"]
+    infra-components = [ 
+        "vpc", 
+        "subnet", 
+        "ec2 "]
 }
 
 data "tfe_organization" "org" {
@@ -24,7 +32,7 @@ data "tfe_organization" "org" {
 
 resource "tfe_workspace" "test" {
   for_each = toset(local.infra-components)
-  name         = each.key
+  name         = "infra-${each.key}"
   organization = data.tfe_organization.org.name
   execution_mode = "local"
 }
